@@ -53,6 +53,37 @@ if (!$SelectedTheme) $SelectedTheme = "Default";
           <ul class="nav navbar-nav">
             <?php if (function_exists('get_navigation_bootstrap')) { get_navigation_bootstrap(return_page_slug()); } else { get_navigation(return_page_slug()); } ?>
           </ul>
+          <?php
+            if ($ThemeSettings->DisplayOtherThemes == "true") {
+              $ThemeUrl = get_theme_url(false);
+
+              function AddThemeMenuItem($ThemeName) {
+                global $ThemeUrl;
+                echo '<li><a href="#" rel="' . $ThemeUrl . '/css/bootstrap_' . $ThemeName . '.min.css">' . $ThemeName . '</a></li>';
+              }
+            
+              echo '<ul class="nav navbar-nav navbar-right">';
+              echo '  <li class="dropdown">';
+              echo '    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Other Themes <b class="caret"></b></a>';
+              echo '    <ul class="dropdown-menu" id="ThemesMenu">';
+              AddThemeMenuItem('Default');
+              echo '<li class="divider"></li>';
+              AddThemeMenuItem('Amelia');
+              AddThemeMenuItem('Cerulean');
+              AddThemeMenuItem('Cosmo');
+              AddThemeMenuItem('Cyborg');
+              AddThemeMenuItem('Flatly');
+              AddThemeMenuItem('Journal');
+              AddThemeMenuItem('Readable');
+              AddThemeMenuItem('Simplex');
+              AddThemeMenuItem('Slate');
+              AddThemeMenuItem('Spacelab');
+              AddThemeMenuItem('United');
+              echo '    </ul>';
+              echo '  </li>';
+              echo '</ul>';
+            }
+          ?>
         </div><!--/.nav-collapse -->
       </div>
     </div>

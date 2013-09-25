@@ -30,31 +30,11 @@
             if($.cookie("css")) {
               $("link.SelectedTheme").attr("href", $.cookie("css"));
             }
-            $(document).on('click', '#ThemesMenu li a', function() { 
+            $("#ThemesMenu li a").click(function() {
               $("link.SelectedTheme").attr("href", $(this).attr('rel'));
               $.cookie("css", $(this).attr('rel'), {expires: 365, path: '/'});
               return false;
             });
-            
-            $("ul.nav").append(
-              '<li class="dropdown">' +
-              '<a class="dropdown-toggle" data-toggle="dropdown" href="#">Other Themes <b class="caret"></b></a>' +
-              '<ul class="dropdown-menu" id="ThemesMenu">' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Default.min.css">Default</a></li>' +
-              '<li class="divider"></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Amelia.min.css">Amelia</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Cerulean.min.css">Cerulean</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Cosmo.min.css">Cosmo</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Cyborg.min.css">Cyborg</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Flatly.min.css">Flatly</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Journal.min.css">Journal</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Readable.min.css">Readable</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Simplex.min.css">Simplex</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Slate.min.css">Slate</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_Spacelab.min.css">Spacelab</a></li>' +
-              '<li><a href="#" rel="<?php get_theme_url(); ?>/css/bootstrap_United.min.css">United</a></li>' +
-              '</ul>' +
-              '</li>');
           });
         </script>
     <?php
