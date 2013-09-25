@@ -113,14 +113,14 @@ function DisplayBootstrap3Form() {
 }
 
 function get_navigation_bootstrap($currentpage) {
-    global $pagesArray;
+    global $pagesArray, $USR;
 
     $menu = '';
 
     $pagesSorted = subval_sort($pagesArray, 'menuOrder');
     if (count($pagesSorted) != 0) {
         foreach ($pagesSorted as $page) {
-            if (($page['menuStatus'] == 'Y') && (!$page['parent'])) {
+            if ((!$page['parent']) && ($page['menuStatus'] == 'Y') && (($page['private'] != 'Y') || ((isset($USR) && $USR == get_cookie('GS_ADMIN_USERNAME'))))) {
                 // Check if we're handling the page the user is on
                 if ($currentpage == $page['url']) {
                     $li_classes = "current active ". $page['parent'] ." ". $page['url'];
@@ -143,7 +143,7 @@ function get_navigation_bootstrap($currentpage) {
                     $submenu = '<ul class="dropdown-menu">';
 
                     foreach ($pagesSorted as $Child) {
-                        if (in_array($Child['url'], $Children)) {
+                        if ((in_array($Child['url'], $Children)) && ($Child['menuStatus'] == 'Y') && (($Child['private'] != 'Y') || ((isset($USR) && $USR == get_cookie('GS_ADMIN_USERNAME'))))) {
                             // Check if we're handling the page the user is on
                             if ($currentpage == $Child['url']) {
                                 $li_classes_child = "current active ". $Child['parent'] ." ". $Child['url'];
