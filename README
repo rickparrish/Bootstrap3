@@ -1,0 +1,37 @@
+Bootstrap3 for GetSimple CMS by Rick Parrish of R&M Software
+http://www.rickparrish.ca http://www.randm.ca
+
+This theme is an implementation of the Twitter Bootstrap framework for GetSimple CMS.
+It also comes with a plugin that allows you to apply a small amount of customization
+to the theme.  Namely:
+
+ - You can pick which of the free Bootswatch themes for Bootstrap you want to use
+ - You can decide whether you want to let users choose a different theme
+
+This theme/plugin incorporates the following open source projects:
+
+  - bootstrap.js v3.0.0
+    - Apache 2.0
+ 
+  - bootswatch themes for bootstrap
+    - Apache 2.0
+ 
+  - HTML5 Shiv v3.6.2pre
+    - MIT/GPLv2
+
+  - jQuery v1.10.2
+    - MIT
+ 
+  - jQuery Cookie plugin
+    - MIT/GPL (presumably v2)
+ 
+  - Respond.js v1.1.0
+    - MIT/GPLv2
+
+It also used the following GetSimple themes/plugin as a base/reference:
+
+  - Innovation Theme Settings 1.2 (plugin)
+    - No license mentioned
+
+  - Twitter-Bootstrap GS (theme)
+    - No license mentioned
