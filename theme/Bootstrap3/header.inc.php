@@ -51,7 +51,7 @@ if (!$SelectedTheme) $SelectedTheme = "Default";
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <?php get_navigation(return_page_slug()); ?>
+            <?php if (function_exists('get_navigation_bootstrap')) { get_navigation_bootstrap(return_page_slug()); } else { get_navigation(return_page_slug()); } ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
