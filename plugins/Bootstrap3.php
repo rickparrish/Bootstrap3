@@ -9,7 +9,6 @@
 
 # get correct id for plugin
 $PluginId=basename(__FILE__, ".php");
-$SettingsFile=GSDATAOTHERPATH . 'Bootstrap3Settings.xml';
 
 # add in this plugin's language file
 i18n_merge($PluginId) || i18n_merge($PluginId, 'en_US');
@@ -49,28 +48,39 @@ $Themes = array(
   'United'
 );
 
-# get XML data
-if (file_exists($SettingsFile)) {
-  $Settings = getXML($SettingsFile);
-}
-
 function DisplayBootstrap3Form() {
-  global  $PluginId, $Settings, $SettingsFile, $Themes;
+  global $PluginId, $Themes;
 
   // init error/success messages
   $ErrorMessage = null;
   $SuccessMessage = null;
   
+  // get XML data (if it exists)
+  $SettingsFile=GSDATAOTHERPATH . 'Bootstrap3Settings.xml';
+  if (file_exists($SettingsFile)) {
+    $Settings = getXML($SettingsFile);
+  }
+  
   // submitted form
-  if (isset($_POST['cmdSubmit'])) {    
-    $xml = @new SimpleXMLElement('<item></item>');
-    $xml->addChild('SelectedTheme', $_POST['cboTheme']);
-    $xml->addChild('DisplayOtherThemes', $_POST['chkDisplayOtherThemes']);
-    if (!$xml->asXML($SettingsFile)) {
-      $ErrorMessage = i18n_r('CHMOD_ERROR');
+  if (isset($_POST['cmdSubmit'])) {
+    // Store selections in case of error and we re-display the form
+    $Settings->ContactEmail = $_POST['txtContactEmail'];
+    $Settings->DisplayOtherThemes = $_POST['chkDisplayOtherThemes'];
+    $Settings->SelectedTheme = $_POST['cboTheme'];
+    
+    if (check_email_address($_POST['txtContactEmail'])) {
+      $xml = @new SimpleXMLElement('<item></item>');
+      $xml->addChild('ContactEmail', $_POST['txtContactEmail']);
+      $xml->addChild('DisplayOtherThemes', $_POST['chkDisplayOtherThemes']);
+      $xml->addChild('SelectedTheme', $_POST['cboTheme']);
+      if (!$xml->asXML($SettingsFile)) {
+        $ErrorMessage = i18n_r('CHMOD_ERROR');
+      } else {
+        $Settings = getXML($SettingsFile);
+        $SuccessMessage = i18n_r('SETTINGS_UPDATED');
+      }
     } else {
-      $Settings = getXML($SettingsFile);
-      $SuccessMessage = i18n_r('SETTINGS_UPDATED');
+      $ErrorMessage = i18n_r('EMAIL_ERROR'); 
     }
   }
   ?>
@@ -97,6 +107,11 @@ function DisplayBootstrap3Form() {
           }
         ?>
       </select>
+    </p>
+    
+    <p>
+      <label for="txtContactEmail"><?php i18n($PluginId . '/CONTACT_EMAIL'); ?></label>
+      <input type="text" id="txtContactEmail" name="txtContactEmail" size="50" value="<?php echo $Settings->ContactEmail; ?>" />
     </p>
     
     <p>
