@@ -114,6 +114,8 @@ if (isset($_POST['cmdSendMessage'])) {
                       }
                     ?>
                 
+                    <div><?php get_page_content(); ?></div>
+
                     <div class="form-group <?php echo $HasErrorName; ?>">
                       <label class="col-lg-2 control-label" for="txtName">Name</label>
                       <div class="col-lg-10">
