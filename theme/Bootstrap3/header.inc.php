@@ -42,7 +42,7 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
     <?php get_header(); ?>
 </head>
   <body id="<?php get_page_slug(); ?>">
-    <div class="navbar <?php echo $NavBarStyle; ?> navbar-fixed-top">
+    <div class="navbar <?php echo $NavBarStyle; ?> navbar-fixed-top" id="NavBar">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -71,7 +71,7 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
               echo '    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Other Themes <b class="caret"></b></a>';
               echo '    <ul class="dropdown-menu" id="ThemesMenu">';
               AddThemeMenuItem('Default');
-              echo '<li class="divider"></li>';
+              echo '      <li class="divider"></li>';
               AddThemeMenuItem('Amelia');
               AddThemeMenuItem('Cerulean');
               AddThemeMenuItem('Cosmo');
@@ -83,6 +83,8 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
               AddThemeMenuItem('Slate');
               AddThemeMenuItem('Spacelab');
               AddThemeMenuItem('United');
+              echo '      <li class="divider"></li>';
+              echo '      <li><a><input type="checkbox" id="chkInvertNavigationBar"' . ($ThemeSettings->InvertNavigationBar == "true" ? 'checked="checked"' : '') . '/> <label for="chkInvertNavigationBar">Invert NavBar</label></a></li>';
               echo '    </ul>';
               echo '  </li>';
               echo '</ul>';

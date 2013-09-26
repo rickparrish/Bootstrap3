@@ -26,22 +26,60 @@
       if ($ThemeSettings->DisplayOtherThemes == "true") {
     ?>
         <script type="text/javascript">
-          $(document).ready(function() { 
-            if($.cookie("css")) {
-              $("link.SelectedTheme").attr("href", $.cookie("css"));
-              HighlightTheme($.cookie("css"));
+          $(document).ready(function() {
+            // If user selected a theme, load it
+            if ($.cookie("theme")) {
+              $("link.SelectedTheme").attr("href", $.cookie("theme"));
+              HighlightTheme($.cookie("theme"));
             }
+
+            // If user selected a navbar inversion, load it
+            if ($.cookie("invert")) {
+              if ($.cookie("invert") == "true") {
+                $('#chkInvertNavigationBar').attr('checked','checked');
+                SetInvert(true);
+              } else {
+                $('#chkInvertNavigationBar').removeAttr('checked');
+                SetInvert(false);
+              }
+            }
+
+            // User is selecting a new theme
             $("#ThemesMenu li a").click(function() {
               $("link.SelectedTheme").attr("href", $(this).attr('rel'));
-              $.cookie("css", $(this).attr('rel'), {expires: 365, path: '/'});
-              HighlightTheme($.cookie("css"));
+              $.cookie("theme", $(this).attr('rel'), {expires: 365, path: '/'});
+              HighlightTheme($.cookie("theme"));
               return false;
+            });
+
+            // User is selecting a new navbar inversion
+            $("#chkInvertNavigationBar").change(function() {
+              if (this.checked) {
+                $.cookie("invert", "true", {expires: 365, path: '/'});
+                SetInvert(true);
+              } else {
+                $.cookie("invert", "false", {expires: 365, path: '/'});
+                SetInvert(false);
+              }
+            });
+
+            // Prevent the menu from disappearing when selecting a navbar inversion
+            $('.dropdown-menu input, .dropdown-menu label').click(function(e) {
+              e.stopPropagation();
             });
           });
           
           function HighlightTheme(url) {
             $("#ThemesMenu li.current").attr("class", "");
             $("#ThemesMenu li a[rel='" + url + "']").parent().attr("class", "current active");
+          }
+          
+          function SetInvert(invert) {
+            if (invert) {
+              $("#NavBar").removeClass("navbar-default").addClass("navbar-inverse");
+            } else {
+              $("#NavBar").addClass("navbar-default").removeClass("navbar-inverse");
+            }
           }
         </script>
     <?php
