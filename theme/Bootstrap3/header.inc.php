@@ -10,8 +10,11 @@
 # Get this theme's settings based on what was entered within its plugin.
 # This function is in functions.php
 $ThemeSettings = Bootstrap3_Settings();
+
 $SelectedTheme = $ThemeSettings->SelectedTheme;
 if (!$SelectedTheme) $SelectedTheme = "Default";
+
+$NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse' : 'navbar-default';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +42,7 @@ if (!$SelectedTheme) $SelectedTheme = "Default";
     <?php get_header(); ?>
 </head>
   <body id="<?php get_page_slug(); ?>">
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar <?php echo $NavBarStyle; ?> navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

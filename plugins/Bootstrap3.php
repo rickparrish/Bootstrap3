@@ -66,12 +66,14 @@ function DisplayBootstrap3Form() {
     // Store selections in case of error and we re-display the form
     $Settings->ContactEmail = $_POST['txtContactEmail'];
     $Settings->DisplayOtherThemes = $_POST['chkDisplayOtherThemes'];
+    $Settings->InvertNavigationBar = $_POST['chkInvertNavigationBar'];
     $Settings->SelectedTheme = $_POST['cboTheme'];
     
     if (check_email_address($_POST['txtContactEmail'])) {
       $xml = @new SimpleXMLElement('<item></item>');
       $xml->addChild('ContactEmail', $_POST['txtContactEmail']);
       $xml->addChild('DisplayOtherThemes', $_POST['chkDisplayOtherThemes']);
+      $xml->addChild('InvertNavigationBar', $_POST['chkInvertNavigationBar']);
       $xml->addChild('SelectedTheme', $_POST['cboTheme']);
       if (!$xml->asXML($SettingsFile)) {
         $ErrorMessage = i18n_r('CHMOD_ERROR');
@@ -110,15 +112,20 @@ function DisplayBootstrap3Form() {
     </p>
     
     <p>
-      <label for="txtContactEmail"><?php i18n($PluginId . '/CONTACT_EMAIL'); ?></label>
-      <input type="text" id="txtContactEmail" name="txtContactEmail" size="50" value="<?php echo $Settings->ContactEmail; ?>" />
+      <label for="chkInvertNavigationBar"><?php i18n($PluginId.'/INVERT_NAVIGATION_BAR'); ?></label>
+      <input type="checkbox" id="chkInvertNavigationBar" name="chkInvertNavigationBar" value="true"<?php echo $Settings->InvertNavigationBar == "true" ? 'checked="checked"' : '' ?>> 
     </p>
-    
+
     <p>
       <label for="chkDisplayOtherThemes"><?php i18n($PluginId.'/DISPLAY_OTHER_THEMES_LABEL'); ?></label>
       <input type="checkbox" id="chkDisplayOtherThemes" name="chkDisplayOtherThemes" value="true"<?php echo $Settings->DisplayOtherThemes == "true" ? 'checked="checked"' : '' ?>> 
     </p>
         
+    <p>
+      <label for="txtContactEmail"><?php i18n($PluginId . '/CONTACT_EMAIL'); ?></label>
+      <input type="text" id="txtContactEmail" name="txtContactEmail" size="50" value="<?php echo $Settings->ContactEmail; ?>" />
+    </p>
+
     <p>
       <input type="submit" id="cmdSubmit" name="cmdSubmit" class="submit" value="<?php i18n('BTN_SAVESETTINGS'); ?>" />
     </p>

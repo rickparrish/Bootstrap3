@@ -8,6 +8,7 @@ $i18n = array (
   "BOOTSTRAP3_DESC"             =>  "Settings for the GetSimple theme: Bootstrap3",
   "CONTACT_EMAIL"               =>  "Contact Email Address",
   "DISPLAY_OTHER_THEMES_LABEL"  =>  "Display 'Other Themes'?",
+  "INVERT_NAVIGATION_BAR"       =>  "Invert Navigation Bar (colour)?",
   "THEME_LABEL"                 =>  "Theme"
 );
 ?>
