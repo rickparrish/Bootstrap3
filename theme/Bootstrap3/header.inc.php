@@ -58,8 +58,9 @@ if (!$SelectedTheme) $SelectedTheme = "Default";
               $ThemeUrl = get_theme_url(false);
 
               function AddThemeMenuItem($ThemeName) {
-                global $ThemeUrl;
-                echo '<li><a href="#" rel="' . $ThemeUrl . '/css/bootstrap_' . $ThemeName . '.min.css">' . $ThemeName . '</a></li>';
+                global $SelectedTheme, $ThemeUrl;
+                $Classes = ($ThemeName == $SelectedTheme) ? 'current active' : '';
+                echo '<li class="' . $Classes . '"><a href="#" rel="' . $ThemeUrl . '/css/bootstrap_' . $ThemeName . '.min.css">' . $ThemeName . '</a></li>';
               }
             
               echo '<ul class="nav navbar-nav navbar-right">';

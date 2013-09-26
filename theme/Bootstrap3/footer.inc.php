@@ -29,13 +29,20 @@
           $(document).ready(function() { 
             if($.cookie("css")) {
               $("link.SelectedTheme").attr("href", $.cookie("css"));
+              HighlightTheme($.cookie("css"));
             }
             $("#ThemesMenu li a").click(function() {
               $("link.SelectedTheme").attr("href", $(this).attr('rel'));
               $.cookie("css", $(this).attr('rel'), {expires: 365, path: '/'});
+              HighlightTheme($.cookie("css"));
               return false;
             });
           });
+          
+          function HighlightTheme(url) {
+            $("#ThemesMenu li.current").attr("class", "");
+            $("#ThemesMenu li a[rel='" + url + "']").parent().attr("class", "current active");
+          }
         </script>
     <?php
       }
