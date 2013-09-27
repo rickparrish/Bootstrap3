@@ -54,7 +54,7 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <?php if (function_exists('get_navigation_bootstrap')) { get_navigation_bootstrap(return_page_slug()); } else { get_navigation(return_page_slug()); } ?>
+            <?php get_navigation_bootstrap(return_page_slug()); ?>
           </ul>
           <?php
             if ($ThemeSettings->DisplayOtherThemes == "true") {
