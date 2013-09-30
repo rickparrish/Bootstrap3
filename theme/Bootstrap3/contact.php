@@ -148,7 +148,7 @@ if (isset($_POST['cmdSendMessage'])) {
                     <div class="form-group <?php echo $HasErrorBody; ?>">
                       <label class="col-lg-2 control-label" for="txtBody">Body</label>
                       <div class="col-lg-10">
-                        <textarea id="txtBody" name="txtBody" class="form-control" rows="3" placeholder="Would you care to elaborate?"><?php echo htmlentities($Body); ?></textarea>
+                        <textarea id="txtBody" name="txtBody" class="form-control" rows="10" placeholder="Would you care to elaborate?"><?php echo htmlentities($Body); ?></textarea>
                       </div>
                     </div>
 
