@@ -23,6 +23,50 @@ function Bootstrap3_Settings() {
     }
 }
 
+function AddPageToNavigation_bootstrap($page, $currentpage, $pagesSorted, $level) {
+    // Make sure there's both a menu and title attribute
+    if ($page['menu'] == '') { $page['menu'] = $page['title']; }
+    if ($page['title'] == '') { $page['title'] = $page['menu']; }
+
+    // Check if the page has children
+    $Children = getChildren($page['url']);
+    if (count($Children) == 0) {
+        // Just a regular link, no children
+        $link = '<a href="' . find_url($page['url'], $page['parent']) . '" title="' . encode_quotes(cl($page['title'])) . '">' . strip_decode($page['menu']) . '</a>';
+        $submenu = '';
+    } else {
+        // We have children, create a submenu
+        $caret = ($level == 1) ? '<b class="caret"></b>' : '';
+        $link = '<a href="' . find_url($page['url'], $page['parent']) . '" title="' . encode_quotes(cl($page['title'])) . '" class="dropdown-toggle" data-toggle="dropdown">' . strip_decode($page['menu']) . $caret . '</a>';
+
+        $submenu = '<ul class="dropdown-menu">';
+
+        foreach ($pagesSorted as $Child) {
+            if ((in_array($Child['url'], $Children)) && ($Child['menuStatus'] == 'Y') && (($Child['private'] != 'Y') || ((isset($USR) && $USR == get_cookie('GS_ADMIN_USERNAME'))))) {
+              $submenu .= AddPageToNavigation_bootstrap($Child, $currentpage, $pagesSorted, $level + 1);
+            }
+        }
+
+        $submenu .= '</ul>';
+    }
+                 
+    // Check if we're handling the page the user is on (or if the submenu contained the page the user is on)
+    if (($currentpage == $page['url']) || (stripos($submenu, "current active") !== false)) {
+        $li_classes = "current active " . $page['parent'] . " " . $page['url'];
+    } else {
+        $li_classes = trim($page['parent'] . " " . $page['url']);
+    }
+    if (count($Children) > 0) { 
+        if ($level == 1) {
+            $li_classes .= " dropdown"; 
+        } else {
+            $li_classes .= " dropdown-submenu";
+        }
+    }
+                 
+    return '<li class="' . $li_classes . '">' . $link . $submenu . '</li>' . "\n";
+}
+
 function get_navigation_bootstrap($currentpage) {
     global $pagesArray, $USR;
 
@@ -32,55 +76,8 @@ function get_navigation_bootstrap($currentpage) {
     if (count($pagesSorted) != 0) {
         foreach ($pagesSorted as $page) {
             if ((!$page['parent']) && ($page['menuStatus'] == 'Y') && (($page['private'] != 'Y') || ((isset($USR) && $USR == get_cookie('GS_ADMIN_USERNAME'))))) {
-                // Check if we're handling the page the user is on
-                if ($currentpage == $page['url']) {
-                    $li_classes = "current active ". $page['parent'] ." ". $page['url'];
-                } else {
-                    $li_classes = trim($page['parent'] ." ". $page['url']);
-                }
-
-                // Make sure there's both a menu and title attribute
-                if ($page['menu'] == '') { $page['menu'] = $page['title']; }
-                if ($page['title'] == '') { $page['title'] = $page['menu']; }
-
-                // Check if the page has children
-                $Children = getChildren($page['url']);
-                if (count($Children) != 0) {
-                    // We have children, create a submenu
-                    $li_classes .= " dropdown";
-
-                    $link = '<a href="'. find_url($page['url'],$page['parent']) . '" title="'. encode_quotes(cl($page['title'])) .'" class="dropdown-toggle" data-toggle="dropdown">'.strip_decode($page['menu']).'<b class="caret"></b></a>';
-
-                    $submenu = '<ul class="dropdown-menu">';
-
-                    foreach ($pagesSorted as $Child) {
-                        if ((in_array($Child['url'], $Children)) && ($Child['menuStatus'] == 'Y') && (($Child['private'] != 'Y') || ((isset($USR) && $USR == get_cookie('GS_ADMIN_USERNAME'))))) {
-                            // Check if we're handling the page the user is on
-                            if ($currentpage == $Child['url']) {
-                                $li_classes_child = "current active ". $Child['parent'] ." ". $Child['url'];
-                                $li_classes .= " current active";
-                            } else {
-                                $li_classes_child = trim($Child['parent'] ." ". $Child['url']);
-                            }
-
-                            // Make sure there's both a menu and title attribute
-                            if ($Child['menu'] == '') { $Child['menu'] = $Child['title']; }
-                            if ($Child['title'] == '') { $Child['title'] = $Child['menu']; }
-
-                            // Add to the sub-menu
-                            $submenu .= '<li class="' . $li_classes_child . '"><a href="' . find_url($Child['url'], $Child['parent']) . '" title="' . encode_quotes(cl($Child['title'])) . '">' . strip_decode($Child['menu']) . '</a></li>';
-                        }
-                    }
-
-                    $submenu .= '</ul>';
-                } else {
-                    // Just a regular link, no children
-                    $link = '<a href="'. find_url($page['url'],$page['parent']) . '" title="'. encode_quotes(cl($page['title'])) .'">'.strip_decode($page['menu']).'</a>';
-                    $submenu = '';
-                }
-
                 // Append to the menu string
-                $menu .= '<li class="'. $li_classes .'">' . $link . $submenu . '</li>'."\n";
+                $menu .= AddPageToNavigation_bootstrap($page, $currentpage, $pagesSorted, 1);
             }
         }
     }
