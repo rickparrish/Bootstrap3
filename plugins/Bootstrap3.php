@@ -68,6 +68,7 @@ function DisplayBootstrap3Form() {
     $Settings->DisplayOtherThemes = $_POST['chkDisplayOtherThemes'];
     $Settings->InvertNavigationBar = $_POST['chkInvertNavigationBar'];
     $Settings->SelectedTheme = $_POST['cboTheme'];
+    $Settings->TrackingId = trim($_POST['txtTrackingId']);
     
     if (check_email_address($_POST['txtContactEmail'])) {
       $xml = @new SimpleXMLElement('<item></item>');
@@ -75,6 +76,7 @@ function DisplayBootstrap3Form() {
       $xml->addChild('DisplayOtherThemes', $_POST['chkDisplayOtherThemes']);
       $xml->addChild('InvertNavigationBar', $_POST['chkInvertNavigationBar']);
       $xml->addChild('SelectedTheme', $_POST['cboTheme']);
+      $xml->addChild('TrackingId', trim($_POST['txtTrackingId']));
       if (!$xml->asXML($SettingsFile)) {
         $ErrorMessage = i18n_r('CHMOD_ERROR');
       } else {
@@ -124,6 +126,11 @@ function DisplayBootstrap3Form() {
     <p>
       <label for="txtContactEmail"><?php i18n($PluginId_Bootstrap3 . '/CONTACT_EMAIL'); ?></label>
       <input type="text" id="txtContactEmail" name="txtContactEmail" size="50" value="<?php echo $Settings->ContactEmail; ?>" />
+    </p>
+
+    <p>
+      <label for="txtTrackingId"><?php i18n($PluginId_Bootstrap3 . '/TRACKING_ID'); ?></label>
+      <input type="text" id="txtTrackingId" name="txtTrackingId" size="50" value="<?php echo $Settings->TrackingId; ?>" />
     </p>
 
     <p>
