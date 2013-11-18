@@ -59,6 +59,18 @@ function DisplayBootstrap3Form() {
   $SettingsFile=GSDATAOTHERPATH . 'Bootstrap3Settings.xml';
   if (file_exists($SettingsFile)) {
     $Settings = getXML($SettingsFile);
+  } else {
+    $XML = <<<XML
+<?xml version='1.0'?>
+<document>
+  <ContactEmail></ContactEmail>
+  <DisplayOtherThemes>false</DisplayOtherThemes>
+  <InvertNavigationBar>false</InvertNavigationBar>
+  <SelectedTheme>Default</SelectedTheme>
+  <TrackingId></TrackingId>
+</document>
+XML;
+    $Settings = simplexml_load_string($XML);
   }
   
   // submitted form

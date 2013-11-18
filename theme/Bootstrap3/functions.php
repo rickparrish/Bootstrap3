@@ -19,7 +19,17 @@ function Bootstrap3_Settings() {
     if (file_exists($file)) {
         return getXML($file);
     } else {
-        return false;
+        $XML = <<<XML
+<?xml version='1.0'?>
+<document>
+  <ContactEmail></ContactEmail>
+  <DisplayOtherThemes>false</DisplayOtherThemes>
+  <InvertNavigationBar>false</InvertNavigationBar>
+  <SelectedTheme>Default</SelectedTheme>
+  <TrackingId></TrackingId>
+</document>
+XML;
+        return simplexml_load_string($XML);
     }
 }
 
