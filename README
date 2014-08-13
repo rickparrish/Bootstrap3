@@ -5,7 +5,7 @@ This theme is an implementation of the Twitter Bootstrap framework for GetSimple
 It also comes with a plugin that allows you to apply a small amount of customization
 to the theme.  Namely:
 
- - Select from one of eleven free Bootswatch themes
+ - Select from one of 18 free Bootswatch themes
  - Select standard or inverted navigation bar colour (different for each theme)
  - Optionally allow users to select own theme via 'Other Themes' nav menu drop down
  - Supply an email address to be used on the Contact template
@@ -13,7 +13,7 @@ to the theme.  Namely:
 
 This theme/plugin incorporates the following open source projects:
 
-  - bootstrap.js v3.0.2
+  - bootstrap.js v3.2.0
     - Apache 2.0
  
   - bootswatch themes for bootstrap
