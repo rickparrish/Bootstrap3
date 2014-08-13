@@ -20,6 +20,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="<?php get_theme_url(); ?>/js/jquery-1.10.2.min.js"></script>
     <script src="<?php get_theme_url(); ?>/js/jquery.cookie.js"></script>
+    <script src="<?php get_theme_url(); ?>/js/jquery.tablesorter.min.js"></script>
     <script src="<?php get_theme_url(); ?>/js/bootstrap.min.js"></script>
     <script>
       if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
