@@ -42,13 +42,19 @@ function DisplayBootstrap3Form() {
     'Cerulean',
     'Cosmo',
     'Cyborg',
+    'Darkly',
     'Flatly',
     'Journal',
+    'Lumen',
+    'Paper',
     'Readable',
+    'Sandstone',
     'Simplex',
     'Slate',
     'Spacelab',
-    'United'
+    'Superhero',
+    'United',
+    'Yeti'
   );
 
   // init error/success messages
