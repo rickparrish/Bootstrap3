@@ -39,6 +39,14 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
       <script src="<?php get_theme_url(); ?>/js/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the start of the document so the content can use jquery -->
+    <script src="<?php get_theme_url(); ?>/js/jquery-1.10.2.min.js"></script>
+    <script src="<?php get_theme_url(); ?>/js/jquery.cookie.js"></script>
+    <script src="<?php get_theme_url(); ?>/js/jquery.tablesorter.min.js"></script>
+    <script src="<?php get_theme_url(); ?>/js/bootstrap.min.js"></script>
+    
     <?php get_header(); ?>
 </head>
   <body id="<?php get_page_slug(); ?>">

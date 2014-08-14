@@ -10,18 +10,11 @@
       <hr>
 
       <footer>
-        <p>Bootstrap3 for GetSimple CMS by <a href="http://www.rickparrish.ca">Rick Parrish</a> of <a href="http://www.randm.ca">R&amp;M Software</a> - <?php get_site_credits(); ?></p>
+        <p><a href="http://getbootstrap.com" target="_blank">Bootstrap3</a> <a href="http://bootswatch.com" target="_blank">with Bootswatch themes</a> <a href="http://get-simple.info" target="_blank">for GetSimple CMS</a> <a href="http://www.rickparrish.ca" target="_blank">by Rick Parrish</a> <a href="http://www.randm.ca" target="_blank">of R&amp;M Software</a> - <?php get_site_credits(); ?></p>
       </footer>
 
     </div> <!-- /container -->
     
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?php get_theme_url(); ?>/js/jquery-1.10.2.min.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/jquery.cookie.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/jquery.tablesorter.min.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/bootstrap.min.js"></script>
     <script>
       if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
         var msViewportStyle = document.createElement("style")
