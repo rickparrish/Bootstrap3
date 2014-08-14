@@ -40,7 +40,16 @@ function AddPageToNavigation_bootstrap($page, $currentpage, $pagesSorted, $level
 
     // Check if the page has children
     $Children = getChildren($page['url']);
-    if (count($Children) == 0) {
+    
+    // Check if any of the children are visible
+    $VisibleCount = 0;
+    foreach ($pagesSorted as $Child) {
+        if ((in_array($Child['url'], $Children)) && ($Child['menuStatus'] == 'Y') && (($Child['private'] != 'Y') || ((isset($USR) && $USR == get_cookie('GS_ADMIN_USERNAME'))))) {
+          $VisibleCount += 1;
+        }
+    }
+
+    if ($VisibleCount == 0) {
         // Just a regular link, no children
         $link = '<a href="' . find_url($page['url'], $page['parent']) . '" title="' . encode_quotes(cl($page['title'])) . '">' . strip_decode($page['menu']) . '</a>';
         $submenu = '';
@@ -66,7 +75,7 @@ function AddPageToNavigation_bootstrap($page, $currentpage, $pagesSorted, $level
     } else {
         $li_classes = trim($page['parent'] . " " . $page['url']);
     }
-    if (count($Children) > 0) { 
+    if ($VisibleCount > 0) { 
         if ($level == 1) {
             $li_classes .= " dropdown"; 
         } else {
