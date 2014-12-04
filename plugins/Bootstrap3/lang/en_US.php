@@ -9,7 +9,7 @@ $i18n = array (
   "CONTACT_EMAIL"               =>  "Contact Email Address",
   "DISPLAY_OTHER_THEMES_LABEL"  =>  "Display 'Other Themes'?",
   "INVERT_NAVIGATION_BAR"       =>  "Invert Navigation Bar (colour)?",
-  "TRACKING_ID"                 =>  "Google Analytics Tracking Id",
+  "TRACKING_ID"                 =>  "Google Universal Analytics Tracking Id",
   "THEME_LABEL"                 =>  "Theme"
 );
 ?>
