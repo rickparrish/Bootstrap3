@@ -62,7 +62,7 @@ body{padding-top:50px}#banner{min-height:300px;border-bottom:none}.page-header h
                     </li>
                   </ul>
                   <form class="navbar-form navbar-left">
-                    <input type="text" placeholder="Search" class="form-control col-lg-8">
+                    <input type="text" placeholder="Search" class="form-control">
                   </form>
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Link</a></li>
@@ -109,7 +109,7 @@ body{padding-top:50px}#banner{min-height:300px;border-bottom:none}.page-header h
                     </li>
                   </ul>
                   <form class="navbar-form navbar-left">
-                    <input type="text" placeholder="Search" class="form-control col-lg-8">
+                    <input type="text" placeholder="Search" class="form-control">
                   </form>
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Link</a></li>
@@ -527,7 +527,7 @@ body{padding-top:50px}#banner{min-height:300px;border-bottom:none}.page-header h
                   </div>
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                      <button class="btn btn-default">Cancel</button>
+                      <button class="btn btn-default" type="button">Cancel</button>
                       <button class="btn btn-primary" type="submit">Submit</button>
                     </div>
                   </div>
@@ -775,7 +775,7 @@ body{padding-top:50px}#banner{min-height:300px;border-bottom:none}.page-header h
           <div class="col-lg-12">
             <h2>Alerts</h2>
             <div class="bs-component">
-              <div class="alert alert-dismissable alert-warning">
+              <div class="alert alert-dismissible alert-warning">
                 <button data-dismiss="alert" class="close" type="button">×</button>
                 <h4>Warning!</h4>
                 <p>Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a class="alert-link" href="#">vel scelerisque nisl consectetur et</a>.</p>
@@ -786,7 +786,7 @@ body{padding-top:50px}#banner{min-height:300px;border-bottom:none}.page-header h
         <div class="row">
           <div class="col-lg-4">
             <div class="bs-component">
-              <div class="alert alert-dismissable alert-danger">
+              <div class="alert alert-dismissible alert-danger">
                 <button data-dismiss="alert" class="close" type="button">×</button>
                 <strong>Oh snap!</strong> <a class="alert-link" href="#">Change a few things up</a> and try submitting again.
               </div>
@@ -794,7 +794,7 @@ body{padding-top:50px}#banner{min-height:300px;border-bottom:none}.page-header h
           </div>
           <div class="col-lg-4">
             <div class="bs-component">
-              <div class="alert alert-dismissable alert-success">
+              <div class="alert alert-dismissible alert-success">
                 <button data-dismiss="alert" class="close" type="button">×</button>
                 <strong>Well done!</strong> You successfully read <a class="alert-link" href="#">this important alert message</a>.
               </div>
@@ -802,7 +802,7 @@ body{padding-top:50px}#banner{min-height:300px;border-bottom:none}.page-header h
           </div>
           <div class="col-lg-4">
             <div class="bs-component">
-              <div class="alert alert-dismissable alert-info">
+              <div class="alert alert-dismissible alert-info">
                 <button data-dismiss="alert" class="close" type="button">×</button>
                 <strong>Heads up!</strong> This <a class="alert-link" href="#">alert needs your attention</a>, but it's not super important.
               </div>
