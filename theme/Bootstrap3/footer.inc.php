@@ -9,6 +9,8 @@
 ?>
       <hr>
 
+      <div id="bootstrapCssTest" class="hide"></div>
+
       <footer>
         <p><a href="http://getbootstrap.com" target="_blank">Bootstrap3</a> <a href="http://bootswatch.com" target="_blank">with Bootswatch themes</a> <a href="http://get-simple.info" target="_blank">for GetSimple CMS</a> <a href="https://www.rickparrish.ca" target="_blank">by Rick Parrish</a> <a href="https://www.randm.ca" target="_blank">of R&amp;M Software</a> - <?php get_site_credits(); ?></p>
       </footer>
@@ -35,6 +37,11 @@
           var SelectedThemeUrlTemplate = '<?php get_theme_url(); ?>/css/bootstrap_{ThemeName}.min.css';
           
           $(document).ready(function() {
+            // Check if the CDN loaded the css
+            if ($('#bootstrapCssTest').is(':visible') === true) {
+              $("link.SelectedTheme").attr("href", '<?php get_theme_url(); ?>/css/bootstrap_<?php echo $SelectedTheme; ?>.min.css');
+            }
+            
             // If user selected a theme, load it
             if ($.cookie("Bootstrap3_SelectedTheme")) {
               if (ThemeNames.indexOf($.cookie("Bootstrap3_SelectedTheme")) >= 0) {

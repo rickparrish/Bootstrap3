@@ -39,6 +39,13 @@ if (!$SelectedTheme) {
   $SelectedTheme = "Default";
 }
 
+# Determine the CDN to use for the selected theme (different for Default vs others)
+if ($SelectedTheme == 'Default') {
+  $SelectedThemeUrl = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css';
+} else {
+  $SelectedThemeUrl = '//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/' . strtolower($SelectedTheme) . '/bootstrap.min.css';
+}
+
 # Get the navigation bar style that was selected by the admin via the plugin
 $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse' : 'navbar-default';
 ?>
@@ -53,7 +60,7 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
     <title><?php get_page_clean_title(); ?> - <?php get_site_name(); ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php get_theme_url(); ?>/css/bootstrap_<?php echo $SelectedTheme; ?>.min.css" rel="stylesheet" class="SelectedTheme">
+    <link href="<?php echo $SelectedThemeUrl; ?>" rel="stylesheet" class="SelectedTheme">
 
     <!-- Custom styles for this template -->
     <link href="<?php get_theme_url(); ?>/css/Bootstrap3.css" rel="stylesheet">
@@ -71,7 +78,7 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
     <script>window.jQuery || document.write('<script src="<?php get_theme_url(); ?>/js/jquery-1.11.2.min.js"><\/script>')</script>
     <script src="<?php get_theme_url(); ?>/js/jquery.cookie.js"></script>
     <script src="<?php get_theme_url(); ?>/js/jquery.tablesorter.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script>$.fn.modal || document.write('<script src="<?php get_theme_url(); ?>/js/bootstrap.min.js"><\/script>')</script>
     
     <?php get_header(); ?>
