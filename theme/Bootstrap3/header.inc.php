@@ -7,13 +7,39 @@
 *
 *****************************************************/
 
+# Valid theme names
+$ThemeNames = [
+  'Cerulean',
+  'Cosmo',
+  'Cyborg',
+  'Darkly',
+  'Flatly',
+  'Journal',
+  'Lumen',
+  'Paper',
+  'Readable',
+  'Sandstone',
+  'Simplex',
+  'Slate',
+  'Spacelab',
+  'Superhero',
+  'United',
+  'Yeti',
+];
+
 # Get this theme's settings based on what was entered within its plugin.
 # This function is in functions.php
 $ThemeSettings = Bootstrap3_Settings();
 
+# Get the theme that was selected by the admin via the plugin
 $SelectedTheme = $ThemeSettings->SelectedTheme;
-if (!$SelectedTheme) $SelectedTheme = "Default";
+if (!$SelectedTheme) {
+  $SelectedTheme = "Default";
+} else if (!in_array($SelectedTheme, $ThemeNames)) {
+  $SelectedTheme = "Default";
+}
 
+# Get the navigation bar style that was selected by the admin via the plugin
 $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse' : 'navbar-default';
 ?>
 <!DOCTYPE html>
@@ -41,10 +67,12 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the start of the document so the content can use jquery -->
-    <script src="<?php get_theme_url(); ?>/js/jquery-1.10.2.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="<?php get_theme_url(); ?>/js/jquery-1.11.2.min.js"><\/script>')</script>
     <script src="<?php get_theme_url(); ?>/js/jquery.cookie.js"></script>
     <script src="<?php get_theme_url(); ?>/js/jquery.tablesorter.min.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script>$.fn.modal || document.write('<script src="<?php get_theme_url(); ?>/js/bootstrap.min.js"><\/script>')</script>
     
     <?php get_header(); ?>
 </head>
@@ -70,7 +98,7 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
               function AddThemeMenuItem($ThemeName) {
                 global $SelectedTheme, $ThemeUrl;
                 $Classes = ($ThemeName == $SelectedTheme) ? 'current active' : '';
-                echo '<li class="' . $Classes . '"><a href="#" rel="' . $ThemeUrl . '/css/bootstrap_' . $ThemeName . '.min.css">' . $ThemeName . '</a></li>';
+                echo '<li class="' . $Classes . '"><a href="#" rel="' . $ThemeUrl . '/css/bootstrap_' . $ThemeName . '.min.css" data-themename="' . $ThemeName . '">' . $ThemeName . '</a></li>';
               }
             
               echo '<ul class="nav navbar-nav navbar-right">';
@@ -79,23 +107,9 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
               echo '    <ul class="dropdown-menu" id="ThemesMenu">';
               AddThemeMenuItem('Default');
               echo '      <li class="divider"></li>';
-              AddThemeMenuItem('Amelia');
-              AddThemeMenuItem('Cerulean');
-              AddThemeMenuItem('Cosmo');
-              AddThemeMenuItem('Cyborg');
-              AddThemeMenuItem('Darkly');
-              AddThemeMenuItem('Flatly');
-              AddThemeMenuItem('Journal');
-              AddThemeMenuItem('Lumen');
-              AddThemeMenuItem('Paper');
-              AddThemeMenuItem('Readable');
-              AddThemeMenuItem('Sandstone');
-              AddThemeMenuItem('Simplex');
-              AddThemeMenuItem('Slate');
-              AddThemeMenuItem('Spacelab');
-              AddThemeMenuItem('Superhero');
-              AddThemeMenuItem('United');
-              AddThemeMenuItem('Yeti');
+              foreach ($ThemeNames as $ThemeName) {
+                AddThemeMenuItem($ThemeName);
+              }
               echo '      <li class="divider"></li>';
               echo '      <li><a><input type="checkbox" id="chkInvertNavigationBar"' . ($ThemeSettings->InvertNavigationBar == "true" ? 'checked="checked"' : '') . '/> <label for="chkInvertNavigationBar">Invert NavBar</label></a></li>';
               echo '    </ul>';

@@ -31,16 +31,22 @@
       if ($ThemeSettings->DisplayOtherThemes == "true") {
     ?>
         <script type="text/javascript">
+          var ThemeNames = ['<?php echo implode("','", $ThemeNames); ?>'];
+          var SelectedThemeUrlTemplate = '<?php get_theme_url(); ?>/css/bootstrap_{ThemeName}.min.css';
+          
           $(document).ready(function() {
             // If user selected a theme, load it
-            if ($.cookie("theme")) {
-              $("link.SelectedTheme").attr("href", $.cookie("theme"));
-              HighlightTheme($.cookie("theme"));
+            if ($.cookie("Bootstrap3_SelectedTheme")) {
+              if (ThemeNames.indexOf($.cookie("Bootstrap3_SelectedTheme")) >= 0) {
+                var SelectedThemeUrl = SelectedThemeUrlTemplate.replace('{ThemeName}', $.cookie("Bootstrap3_SelectedTheme"));
+                $("link.SelectedTheme").attr("href", SelectedThemeUrl);
+                HighlightTheme(SelectedThemeUrl);
+              }
             }
 
             // If user selected a navbar inversion, load it
-            if ($.cookie("invert")) {
-              if ($.cookie("invert") == "true") {
+            if ($.cookie("Bootstrap3_InvertNavigationBar")) {
+              if ($.cookie("Bootstrap3_InvertNavigationBar") == "true") {
                 $('#chkInvertNavigationBar').attr('checked','checked');
                 SetInvert(true);
               } else {
@@ -52,18 +58,18 @@
             // User is selecting a new theme
             $("#ThemesMenu li a").click(function() {
               $("link.SelectedTheme").attr("href", $(this).attr('rel'));
-              $.cookie("theme", $(this).attr('rel'), {expires: 365, path: '/'});
-              HighlightTheme($.cookie("theme"));
+              $.cookie("Bootstrap3_SelectedTheme", $(this).data('themename'), {expires: 3650, path: '/'});
+              HighlightTheme($.cookie("Bootstrap3_SelectedTheme"));
               return false;
             });
 
             // User is selecting a new navbar inversion
             $("#chkInvertNavigationBar").change(function() {
               if (this.checked) {
-                $.cookie("invert", "true", {expires: 365, path: '/'});
+                $.cookie("Bootstrap3_InvertNavigationBar", "true", {expires: 3650, path: '/'});
                 SetInvert(true);
               } else {
-                $.cookie("invert", "false", {expires: 365, path: '/'});
+                $.cookie("Bootstrap3_InvertNavigationBar", "false", {expires: 3650, path: '/'});
                 SetInvert(false);
               }
             });

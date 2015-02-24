@@ -38,7 +38,6 @@ function DisplayBootstrap3Form() {
 
   $Themes = array(
     'Default',
-    'Amelia',
     'Cerulean',
     'Cosmo',
     'Cyborg',
