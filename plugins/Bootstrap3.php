@@ -36,6 +36,18 @@ if ($TEMPLATE == "Bootstrap3" || (get_filename_id() == 'theme' && isset($_POST['
 function DisplayBootstrap3Form() {
   global $PluginId_Bootstrap3;
 
+  $Templates = array(
+    'bootswatch.php' => 'Bootswatch theme demo',
+    'contact.php' => 'Contact form md-8, Sidebar md-4',
+    'nosidebar.php' => 'Content full width',
+    'noheaderorsidebar.php' => 'Content full width (no header)',
+    'content-md-8_sidebar-md-4.php' => 'Content md-8, Sidebar md-4',
+    'noheader.php' => 'Content md-8, Sidebar md-4 (no header)',
+    'custom_content_sidebar.php' => 'Custom sized content and sidebar (specify classes below)',
+    'jumbotron.php' => 'Jumbotron full width (no header)'
+  );
+
+
   $Themes = array(
     'Default',
     'Cerulean',
@@ -64,14 +76,20 @@ function DisplayBootstrap3Form() {
   $SettingsFile=GSDATAOTHERPATH . 'Bootstrap3Settings.xml';
   if (file_exists($SettingsFile)) {
     $Settings = getXML($SettingsFile);
+    if ($Settings->ContentDivClass == '') $Settings->ContentDivClass = 'col-md-8';
+    if ($Settings->DefaultTemplate == '') $Settings->DefaultTemplate = 'custom_content_sidebar.php';
+    if ($Settings->SidebarDivClass == '') $Settings->SidebarDivClass = 'col-md-4';
   } else {
     $XML = <<<XML
 <?xml version='1.0'?>
 <document>
   <ContactEmail></ContactEmail>
+  <ContentDivClass>col-md-8</ContentDivClass>
+  <DefaultTemplate>custom_content_sidebar.php</DefaultTemplate>
   <DisplayOtherThemes>false</DisplayOtherThemes>
   <InvertNavigationBar>false</InvertNavigationBar>
   <SelectedTheme>Default</SelectedTheme>
+  <SidebarDivClass>col-md-4</SidebarDivClass>
   <TrackingId></TrackingId>
 </document>
 XML;
@@ -82,17 +100,23 @@ XML;
   if (isset($_POST['cmdSubmit'])) {
     // Store selections in case of error and we re-display the form
     $Settings->ContactEmail = $_POST['txtContactEmail'];
+    $Settings->ContentDivClass = $_POST['txtContentDivClass'];
+    $Settings->DefaultTemplate = $_POST['cboDefaultTemplate'];
     $Settings->DisplayOtherThemes = $_POST['chkDisplayOtherThemes'];
     $Settings->InvertNavigationBar = $_POST['chkInvertNavigationBar'];
     $Settings->SelectedTheme = $_POST['cboTheme'];
+    $Settings->SidebarDivClass = $_POST['txtSidebarDivClass'];
     $Settings->TrackingId = trim($_POST['txtTrackingId']);
     
     if (check_email_address($_POST['txtContactEmail'])) {
       $xml = @new SimpleXMLElement('<item></item>');
       $xml->addChild('ContactEmail', $_POST['txtContactEmail']);
+      $xml->addChild('ContentDivClass', $_POST['txtContentDivClass']);
+      $xml->addChild('DefaultTemplate', $_POST['cboDefaultTemplate']);
       $xml->addChild('DisplayOtherThemes', $_POST['chkDisplayOtherThemes']);
       $xml->addChild('InvertNavigationBar', $_POST['chkInvertNavigationBar']);
       $xml->addChild('SelectedTheme', $_POST['cboTheme']);
+      $xml->addChild('SidebarDivClass', $_POST['txtSidebarDivClass']);
       $xml->addChild('TrackingId', trim($_POST['txtTrackingId']));
       if (!$xml->asXML($SettingsFile)) {
         $ErrorMessage = i18n_r('CHMOD_ERROR');
@@ -118,6 +142,28 @@ XML;
   ?>
   
   <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+    <p>
+      <label for="cboDefaultTemplate"><?php i18n($PluginId_Bootstrap3 . '/TEMPLATE_LABEL'); ?></label>
+      <select name="cboDefaultTemplate" id="cboDefaultTemplate">
+        <?php
+          foreach ($Templates as $Filename => $Description) {
+            $Selected = ($Settings->DefaultTemplate == $Filename) ? ' selected="selected"' : '';
+            echo "<option value=\"$Filename\"$Selected>$Description</option>";
+          }
+        ?>
+      </select>
+    </p>
+    
+    <p>
+      <label for="txtContentDivClass"><?php i18n($PluginId_Bootstrap3 . '/CONTENT_DIV_CLASS'); ?></label>
+      <input type="text" id="txtContentDivClass" name="txtContentDivClass" size="50" value="<?php echo $Settings->ContentDivClass; ?>" />
+    </p>
+
+    <p>
+      <label for="txtSidebarDivClass"><?php i18n($PluginId_Bootstrap3 . '/SIDEBAR_DIV_CLASS'); ?></label>
+      <input type="text" id="txtSidebarDivClass" name="txtSidebarDivClass" size="50" value="<?php echo $Settings->SidebarDivClass; ?>" />
+    </p>
+
     <p>
       <label for="cboTheme"><?php i18n($PluginId_Bootstrap3 . '/THEME_LABEL'); ?></label>
       <select name="cboTheme" id="cboTheme">
