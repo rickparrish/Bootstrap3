@@ -55,7 +55,7 @@ $NavBarStyle = ($ThemeSettings->InvertNavigationBar == 'true') ? 'navbar-inverse
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="<?php get_theme_url(); ?>/ico/favicon.png">
+    <link rel="shortcut icon" href="<?php get_site_url(); ?>/favicon.ico">
 
     <title><?php get_page_clean_title(); ?> - <?php get_site_name(); ?></title>
 
