@@ -11,7 +11,9 @@
 
       <div class="row">
         <div class="col-md-8">
-          <h1><?php get_page_title(); ?></h1>
+          <div class="page-header">
+            <h1><?php get_page_title(); ?></h1>
+          </div>
           <?php get_page_content(); ?>
         </div>
         
