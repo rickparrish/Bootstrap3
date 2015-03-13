@@ -9,6 +9,7 @@ $i18n = array (
   "CONTACT_EMAIL"               =>  "Contact Email Address",
   "CONTENT_DIV_CLASS"           =>  "Custom content div class (ie col-md-8)",
   "DISPLAY_OTHER_THEMES_LABEL"  =>  "Display 'Other Themes'?",
+  "FOOTER"                      =>  "Footer (HTML allowed, no PHP)",
   "INVERT_NAVIGATION_BAR"       =>  "Invert Navigation Bar (colour)?",
   "SIDEBAR_DIV_CLASS"           =>  "Custom sidebar div class (ie col-md-4)",
   "TEMPLATE_LABEL"              =>  "Default Template",

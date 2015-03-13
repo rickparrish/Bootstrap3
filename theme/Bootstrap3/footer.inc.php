@@ -12,7 +12,17 @@
       <div id="bootstrapCssTest" class="hide"></div>
 
       <footer>
-        <p><a href="http://getbootstrap.com" target="_blank">Bootstrap3</a> <a href="http://bootswatch.com" target="_blank">with Bootswatch themes</a> <a href="http://get-simple.info" target="_blank">for GetSimple CMS</a> <a href="https://www.rickparrish.ca" target="_blank">by Rick Parrish</a> <a href="https://www.randm.ca" target="_blank">of R&amp;M Software</a> - <?php get_site_credits(); ?></p>
+        <p>
+          <?php
+            if ($ThemeSettings->Footer) {
+              echo $ThemeSettings->Footer;
+            } else {
+          ?>
+              <a href="http://getbootstrap.com" target="_blank">Bootstrap3</a> <a href="http://bootswatch.com" target="_blank">with Bootswatch themes</a> <a href="http://get-simple.info" target="_blank">for GetSimple CMS</a> <a href="https://www.rickparrish.ca" target="_blank">by Rick Parrish</a> <a href="https://www.randm.ca" target="_blank">of R&amp;M Software</a> - <?php get_site_credits(); ?>
+          <?php
+            }
+          ?>
+        </p>
       </footer>
 
     </div> <!-- /container -->

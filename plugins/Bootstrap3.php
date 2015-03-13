@@ -87,6 +87,7 @@ function DisplayBootstrap3Form() {
   <ContentDivClass>col-md-8</ContentDivClass>
   <DefaultTemplate>custom_content_sidebar.php</DefaultTemplate>
   <DisplayOtherThemes>false</DisplayOtherThemes>
+  <Footer></Footer>
   <InvertNavigationBar>false</InvertNavigationBar>
   <SelectedTheme>Default</SelectedTheme>
   <SidebarDivClass>col-md-4</SidebarDivClass>
@@ -103,6 +104,7 @@ XML;
     $Settings->ContentDivClass = $_POST['txtContentDivClass'];
     $Settings->DefaultTemplate = $_POST['cboDefaultTemplate'];
     $Settings->DisplayOtherThemes = $_POST['chkDisplayOtherThemes'];
+    $Settings->Footer = str_replace('&', '&amp;', $_POST['txtFooter']);
     $Settings->InvertNavigationBar = $_POST['chkInvertNavigationBar'];
     $Settings->SelectedTheme = $_POST['cboTheme'];
     $Settings->SidebarDivClass = $_POST['txtSidebarDivClass'];
@@ -114,6 +116,7 @@ XML;
       $xml->addChild('ContentDivClass', $_POST['txtContentDivClass']);
       $xml->addChild('DefaultTemplate', $_POST['cboDefaultTemplate']);
       $xml->addChild('DisplayOtherThemes', $_POST['chkDisplayOtherThemes']);
+      $xml->addChild('Footer', str_replace('&', '&amp;', $_POST['txtFooter']));
       $xml->addChild('InvertNavigationBar', $_POST['chkInvertNavigationBar']);
       $xml->addChild('SelectedTheme', $_POST['cboTheme']);
       $xml->addChild('SidebarDivClass', $_POST['txtSidebarDivClass']);
@@ -194,6 +197,11 @@ XML;
     <p>
       <label for="txtTrackingId"><?php i18n($PluginId_Bootstrap3 . '/TRACKING_ID'); ?></label>
       <input type="text" id="txtTrackingId" name="txtTrackingId" size="50" value="<?php echo $Settings->TrackingId; ?>" />
+    </p>
+
+    <p>
+      <label for="txtFooter"><?php i18n($PluginId_Bootstrap3 . '/FOOTER'); ?></label>
+      <input type="text" id="txtFooter" name="txtFooter" size="50" value="<?php echo htmlentities($Settings->Footer); ?>" />
     </p>
 
     <p>
