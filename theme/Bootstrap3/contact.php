@@ -49,12 +49,13 @@ if (isset($_POST['cmdSendMessage'])) {
   }
   
   if (empty($FormError)) {
+    $Body = "From: $Name <$Email>\n\n$Body";
     if (!empty($Url)) {
       $Subject = "(CONTACT_SPAM) " . $Subject;
       $Body = "Url: $Url\n\n" . $Body;
     }
 
-    if (@mail($ThemeSettings->ContactEmail, $Subject, $Body, 'From: "' . str_replace('"', "'", $Name) . '" <' . $Email . '>')) {
+    if (@mail($ThemeSettings->ContactEmail, $Subject, $Body, 'From: ' . $ThemeSettings->ContactEmail . "\r\n" . 'Reply-To: "' . str_replace('"', "'", $Name) . '" <' . $Email . '>')) {
       $Success = true;
       
       $Subject = '';
@@ -69,7 +70,7 @@ if (isset($_POST['cmdSendMessage'])) {
 <?php include('header.inc.php'); ?>
 
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-7 col-lg-offset-2">
           
           <?php
             if (check_email_address($ThemeSettings->ContactEmail)) {
@@ -173,10 +174,6 @@ if (isset($_POST['cmdSendMessage'])) {
             }
           ?>
             
-        </div>
-        
-        <div class="col-md-4">
-          <?php get_component('sidebar'); ?>
         </div>
       </div>
 
